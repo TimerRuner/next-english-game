@@ -1,0 +1,29 @@
+.category {
+    background-color: white;
+    min-height: 100vh;
+    padding: 50px 40px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 0 0 20px 0;
+}
+
+.preview {
+    height: 133px;
+    width: 133px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-right: 20px;
+}
+.headerInfo {
+}
+
+.title {
+}
+.desc {
+    font-size: 18px;
+    line-height: 20px;
+    color: rgb(171, 169, 169);
+}

@@ -1,0 +1,57 @@
+.playGround {
+    background-color: white;
+    width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.termsItems {
+    border: 2px solid grey;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px 20px;
+    padding: 10px;
+    min-width: 30%;
+    min-height: 50px;
+    justify-content: space-around;
+}
+.termsItem {
+    cursor: grab;
+    min-height: 20px;
+    min-width: 40px;
+    padding: 10px;
+    border: 1px solid lightcoral;
+    border-radius: 5px;
+}
+.termsItem:not(:first-child) {
+    margin: 0 0 0 10px;
+}
+
+.definitionContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.definitionItem {
+    display: flex;
+    margin: 0 20px 0 0;
+}
+.definitionBoard {
+    min-height: 50px;
+    min-width: 50px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 10px;
+}
+.definitionText {
+    margin: 0 0 0 10px;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,11 @@
+.categoryList {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.listWrapper {
+    display: flex;
+    margin: 30px 0 0 0;
+}
