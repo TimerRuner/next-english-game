@@ -18,3 +18,19 @@ a {
 body {
     background-color: lightgray !important;
 }
+
+.result-modal-enter {
+    opacity: 0;
+}
+.result-modal-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.result-modal-exit {
+    opacity: 1;
+}
+.result-modal-exit-active {
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+}

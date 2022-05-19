@@ -1,10 +1,13 @@
 import styles from "../styles/PlayGround.module.css"
-import React, { useId, useState } from "react"
+import React, { useState } from "react"
+import ResultModal from "./ResultModal"
 
 const PlayGround = ({ game }) => {
+    let modalTimer = null
     const terms = game.data.map((item) => ({
         id: item._id,
         title: item.terms,
+        styles: {},
     }))
     const definitions = game.data.map((item) => ({
         id: item._id,
@@ -20,10 +23,15 @@ const PlayGround = ({ game }) => {
 
     const [currentBoard, setCurrentBoard] = useState(null)
     const [currentItem, setCurrentItem] = useState(null)
+    const [result, setResult] = useState(0)
+    const [visible, setVisible] = useState(false)
+    const [isSubmit, setIsSubmit] = useState(false)
+    const [animResult, setAnimResult] = useState(0)
 
     //? Term===============================================
     const termsDragStart = (e, board, item) => {
         e.stopPropagation()
+
         setCurrentBoard(board)
         setCurrentItem(item)
     }
@@ -51,6 +59,7 @@ const PlayGround = ({ game }) => {
         board.item.splice(dropIndex + 1, 0, currentItem)
 
         setTermsBoard({ ...board })
+        setResult(0)
     }
 
     //? Def===============================================
@@ -94,6 +103,7 @@ const PlayGround = ({ game }) => {
             })
         )
         e.target.style.boxShadow = "none"
+        setResult(0)
     }
 
     //? Def board==================================================
@@ -124,6 +134,7 @@ const PlayGround = ({ game }) => {
                 return b
             })
         )
+        setResult(0)
     }
     const defBoardLeave = (e) => {
         e.stopPropagation()
@@ -144,15 +155,86 @@ const PlayGround = ({ game }) => {
         e.stopPropagation()
         e.preventDefault()
         e.target.style.backgroundColor = "lightgray"
-        console
     }
     const termsContainerDrop = (e, board) => {
         e.stopPropagation()
         e.target.style.backgroundColor = "white"
         board.item.push(currentBoard.item.pop())
         setTermsBoard({ ...board })
+        setResult(0)
     }
 
+    let isDisable = definitionBoards.some((elem) => elem.item.length > 0)
+
+    const submitHandler = () => {
+        setIsSubmit(true)
+        if (!result) {
+            definitionBoards.map((defb, index) => {
+                if (defb.id === defb.item[0]?.id) {
+                    setResult((prev) => prev + 1)
+                    if (defb.item.length > 0) {
+                        setTimeout(() => {
+                            defb.item[0].styles = {
+                                color: "white",
+                                backgroundColor: "green",
+                                border: "1px solid green",
+                                transition: "background-color 0.3s ease",
+                            }
+                            setAnimResult(index)
+                        }, 500 * index)
+                    }
+
+                    termsBoard.item.forEach(
+                        (i) =>
+                            (i.styles = {
+                                backgroundColor: "grey",
+                                color: "white",
+                                border: "1px solid grey",
+                            })
+                    )
+                } else {
+                    if (defb.item.length > 0) {
+                        setTimeout(() => {
+                            defb.item[0].styles = {
+                                color: "white",
+                                backgroundColor: "red",
+                                border: "1px solid red",
+                                transition: "background-color 0.3s ease",
+                            }
+                            setAnimResult(index)
+                        }, 500 * index)
+                    }
+                }
+            })
+        }
+        setTimeout(() => {
+            setVisible(true)
+        }, 5000)
+    }
+    const resetHandler = () => {
+        setIsSubmit(false)
+
+        terms = game.data.map((item) => ({
+            id: item._id,
+            title: item.terms,
+        }))
+        definitions = game.data.map((item) => ({
+            id: item._id,
+            title: item.definition,
+            item: [],
+        }))
+        setTermsBoard({
+            id: "290549867349",
+            title: "Terms",
+            item: terms,
+        })
+        setDefinitionBoards([...definitions])
+        setResult(0)
+        setVisible(false)
+    }
+    const closeHandler = () => {
+        setVisible(false)
+    }
     return (
         <div className={styles.playGround}>
             <div
@@ -165,13 +247,14 @@ const PlayGround = ({ game }) => {
                 {termsBoard.item.map((obj) => (
                     <div
                         className={styles.termsItem}
-                        key={obj._id}
-                        draggable={true}
+                        key={obj.id}
+                        draggable={!isSubmit}
                         onDragStart={(e) => termsDragStart(e, termsBoard, obj)}
                         onDragLeave={(e) => termsDragLeave(e)}
                         onDragEnd={(e) => termsDragEnd(e)}
                         onDragOver={(e) => termsDragOver(e)}
                         onDrop={(e) => termsDrop(e, termsBoard, obj)}
+                        style={obj.styles}
                     >
                         {obj.title}
                     </div>
@@ -179,7 +262,7 @@ const PlayGround = ({ game }) => {
             </div>
             <div className={styles.definitionContainer}>
                 {definitionBoards.map((board) => (
-                    <div key={board._id} className={styles.definitionItem}>
+                    <div key={board.id} className={styles.definitionItem}>
                         <div
                             className={styles.definitionBoard}
                             onDragOver={(e) => defBoardDragOver(e)}
@@ -190,8 +273,8 @@ const PlayGround = ({ game }) => {
                                 board.item.map((def) => (
                                     <div
                                         className={styles.termsItem}
-                                        key={def._id}
-                                        draggable={true}
+                                        key={def.id}
+                                        draggable={!isSubmit}
                                         onDragStart={(e) =>
                                             defDragStart(e, board, def)
                                         }
@@ -199,6 +282,7 @@ const PlayGround = ({ game }) => {
                                         onDragEnd={(e) => defDragEnd(e)}
                                         onDragOver={(e) => defDragOver(e)}
                                         onDrop={(e) => defDrop(e, board, def)}
+                                        style={def.styles}
                                     >
                                         {def.title}
                                     </div>
@@ -210,6 +294,26 @@ const PlayGround = ({ game }) => {
                     </div>
                 ))}
             </div>
+            <div className={styles.buttonsContainer}>
+                <button
+                    className={styles.submitButton}
+                    disabled={!isDisable}
+                    type="submit"
+                    onClick={submitHandler}
+                >
+                    Submit
+                </button>
+                <button className={styles.resetButton} onClick={resetHandler}>
+                    Reset
+                </button>
+            </div>
+            <ResultModal
+                result={result}
+                restart={resetHandler}
+                visible={visible}
+                close={closeHandler}
+                all={definitionBoards.length}
+            />
         </div>
     )
 }

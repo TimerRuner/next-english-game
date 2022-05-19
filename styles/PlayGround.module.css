@@ -6,6 +6,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    position: relative;
 }
 
 .termsItems {
@@ -19,6 +20,7 @@
     min-width: 30%;
     min-height: 50px;
     justify-content: space-around;
+    font-weight: bold;
 }
 .termsItem {
     cursor: grab;
@@ -35,6 +37,7 @@
 .definitionContainer {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 0 50px 0;
 }
 .definitionItem {
     display: flex;
@@ -54,4 +57,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.submitButton {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: greenyellow;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+}
+.resetButton {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: lightcoral;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.submitButton:active {
+    background-color: rgb(148, 219, 42);
+}
+.resetButton:active {
+    background-color: rgb(244, 96, 96);
 }
