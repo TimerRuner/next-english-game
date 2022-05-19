@@ -9,10 +9,7 @@ const GamePage = ({ id: [catId, gameId] }) => {
     return (
         <div className="container">
             <div className={styles.gamePage}>
-                <PlayGround game={game} />
-                <div className={styles.info}>
-                    <h2 className={styles.gameName}>{game.title}</h2>
-                </div>
+                <PlayGround game={game} title={game.title} />
             </div>
         </div>
     )

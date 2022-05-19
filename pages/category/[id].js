@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 
 import styles from "../../styles/Category.module.css"
 import GameItem from "../../components/GameItem"
+import Link from "next/link"
 
 const Category = ({ id }) => {
     const { category } = useTypedSelector((store) => store.category)
@@ -23,6 +24,13 @@ const Category = ({ id }) => {
                 {games.map((game) => (
                     <GameItem key={game._id} categoryId={id} game={game} />
                 ))}
+                <div className={styles.buttonContainer}>
+                    <Link href="/create">
+                        <a className={styles.createGameButton}>
+                            Create New Game
+                        </a>
+                    </Link>
+                </div>
             </div>
         </div>
     )

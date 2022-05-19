@@ -2,7 +2,7 @@ import { useState } from "react"
 import styles from "../styles/ResultModal.module.css"
 import { CSSTransition } from "react-transition-group"
 
-const ResultModal = ({ result, restart, visible, close, all }) => {
+const ResultModal = ({ result, restart, visible, close, all, openAnswer }) => {
     return (
         <CSSTransition
             timeout={500}
@@ -15,6 +15,12 @@ const ResultModal = ({ result, restart, visible, close, all }) => {
                     <div className={styles.result}>
                         Result of Game: {result} / {all}
                     </div>
+                    <button
+                        className={styles.awnsersButton}
+                        onClick={openAnswer}
+                    >
+                        Show answers
+                    </button>
                     <button className={styles.restartButton} onClick={restart}>
                         Restart
                     </button>

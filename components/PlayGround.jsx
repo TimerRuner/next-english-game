@@ -1,9 +1,9 @@
 import styles from "../styles/PlayGround.module.css"
 import React, { useState } from "react"
 import ResultModal from "./ResultModal"
+import AnswersModal from "./AnswersModal"
 
-const PlayGround = ({ game }) => {
-    let modalTimer = null
+const PlayGround = ({ game, title }) => {
     const terms = game.data.map((item) => ({
         id: item._id,
         title: item.terms,
@@ -27,6 +27,7 @@ const PlayGround = ({ game }) => {
     const [visible, setVisible] = useState(false)
     const [isSubmit, setIsSubmit] = useState(false)
     const [animResult, setAnimResult] = useState(0)
+    const [visibleAnswers, setVisibleAnsvers] = useState(false)
 
     //? Term===============================================
     const termsDragStart = (e, board, item) => {
@@ -209,7 +210,7 @@ const PlayGround = ({ game }) => {
         }
         setTimeout(() => {
             setVisible(true)
-        }, 5000)
+        }, 500 * definitionBoards.length)
     }
     const resetHandler = () => {
         setIsSubmit(false)
@@ -232,11 +233,19 @@ const PlayGround = ({ game }) => {
         setResult(0)
         setVisible(false)
     }
-    const closeHandler = () => {
-        setVisible(false)
+
+    const backHandler = () => {
+        setVisibleAnsvers(false)
     }
+
+    const openAnswerHandler = (e) => {
+        e.stopPropagation()
+        setVisibleAnsvers(true)
+    }
+
     return (
         <div className={styles.playGround}>
+            <h2 className={styles.gameTitle}>{title}</h2>
             <div
                 className={styles.termsItems}
                 onDragLeave={(e) => termsContainerDragLeave(e)}
@@ -303,16 +312,19 @@ const PlayGround = ({ game }) => {
                 >
                     Submit
                 </button>
-                <button className={styles.resetButton} onClick={resetHandler}>
-                    Reset
-                </button>
             </div>
             <ResultModal
                 result={result}
                 restart={resetHandler}
                 visible={visible}
-                close={closeHandler}
+                close={resetHandler}
                 all={definitionBoards.length}
+                openAnswer={openAnswerHandler}
+            />
+            <AnswersModal
+                answers={game.data}
+                isVisible={visibleAnswers}
+                back={backHandler}
             />
         </div>
     )
