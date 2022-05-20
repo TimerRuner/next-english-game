@@ -5,11 +5,12 @@ import {
     legacy_createStore as createStore,
     Store,
 } from "redux"
+import { composeWithDevTools } from "redux-devtools-extension"
 import thunk, { ThunkDispatch } from "redux-thunk"
 import { reducer, RootState } from "./reducer/index.ts"
 
 const makeStore: MakeStore<Store<RootState, any>> = (context: Context) =>
-    createStore(reducer, applyMiddleware(thunk))
+    createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 export const wrapper = createWrapper<Store<RootState, any>>(makeStore, {
     debug: true,

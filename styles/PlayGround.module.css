@@ -93,3 +93,22 @@
 .resetButton:active {
     background-color: rgb(244, 96, 96);
 }
+.back {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: rgb(197, 197, 197);
+    border: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 10px 0;
+    color: white;
+    text-decoration: none;
+}
+.back:hover {
+    color: white;
+    background-color: rgb(197, 197, 197);
+}

@@ -23,5 +23,15 @@ export interface IData {
     _id: string
     terms: string
     definition: string
-    order: number
 }
+
+export enum CategoryConstActions {
+    CREATEGAME = "CREATEGAME",
+}
+
+interface CreateGame {
+    type: CategoryConstActions.CREATEGAME
+    payload: { IGame; categoryId: string }
+}
+
+export type CategoryActionTypes = CreateGame

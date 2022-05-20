@@ -2,8 +2,9 @@ import styles from "../styles/PlayGround.module.css"
 import React, { useState } from "react"
 import ResultModal from "./ResultModal"
 import AnswersModal from "./AnswersModal"
+import Link from "next/link"
 
-const PlayGround = ({ game, title }) => {
+const PlayGround = ({ game, title, catId }) => {
     const terms = game.data.map((item) => ({
         id: item._id,
         title: item.terms,
@@ -312,6 +313,9 @@ const PlayGround = ({ game, title }) => {
                 >
                     Submit
                 </button>
+                <Link href={`/category/${catId}`}>
+                    <a className={styles.back}>Back</a>
+                </Link>
             </div>
             <ResultModal
                 result={result}
