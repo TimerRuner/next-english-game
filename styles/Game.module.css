@@ -1,5 +1,11 @@
 .gameItem {
     text-decoration: none;
+    margin: 0 20px 20px 0;
+}
+@media all and (max-width: 400px) {
+    .gameItem {
+        margin: 0 0 20px 0;
+    }
 }
 
 .preview {

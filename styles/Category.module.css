@@ -56,3 +56,9 @@
     justify-content: center;
     margin-top: 50px;
 }
+
+.itemWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

@@ -30,7 +30,11 @@
     border: 1px solid grey;
     border-radius: 5px;
 }
-
+@media all and (max-width: 568px) {
+    .input {
+        width: 100%;
+    }
+}
 .itemsData {
 }
 .itemWrapper {
@@ -38,9 +42,19 @@
     align-items: center;
     margin: 0 0 30px 0;
 }
+@media all and (max-width: 568px) {
+    .itemWrapper {
+        flex-direction: column;
+    }
+}
 .inputWrapper {
     margin: 0 10px 20px 0;
     width: calc(50% - 10px);
+}
+@media all and (max-width: 568px) {
+    .inputWrapper {
+        width: 100%;
+    }
 }
 .inputWrapper:last-child {
     margin: 0 0 20px 0;
@@ -73,7 +87,7 @@
 }
 
 .submitButton {
-    min-height: 30px;
+    min-height: 40px;
     padding: 5px;
     min-width: 100px;
     border: 2px solid lightcyan;
@@ -83,6 +97,7 @@
     color: white;
     font-size: 18px;
     font-weight: bold;
+    margin: 0 0 10px 0;
 }
 
 .submitButton:hover,
@@ -111,8 +126,46 @@
     display: flex;
     flex-wrap: wrap;
 }
+@media all and (max-width: 568px) {
+    .itemContainer {
+        flex-direction: column;
+    }
+}
 .error {
     width: 100%;
     color: red;
     font-weight: bold;
+}
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: space-around;
+    width: 100%;
+}
+.back {
+    width: 100px;
+    height: 39px;
+    border-radius: 10px;
+    background-color: rgb(197, 197, 197);
+    border: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+}
+@media all and (max-width: 400px) {
+    .buttons {
+        flex-direction: column;
+    }
+    .back {
+        width: 100%;
+    }
+}
+.back:hover {
+    color: white;
+    background-color: rgb(197, 197, 197);
 }

@@ -142,11 +142,18 @@ const CreatePage = ({ id }) => {
                         </button>
                     )}
                 </form>
-                <button className={styles.submitButton} onClick={submitHandler}>
-                    Create
-                </button>
+                <div className={styles.buttons}>
+                    <button
+                        className={styles.submitButton}
+                        onClick={submitHandler}
+                    >
+                        Create
+                    </button>
 
-                <Link href={`/category/${id}`}>Back</Link>
+                    <Link href={`/category/${id}`}>
+                        <a className={styles.back}>Back</a>
+                    </Link>
+                </div>
             </div>
         </div>
     )

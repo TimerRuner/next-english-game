@@ -8,4 +8,6 @@
 .listWrapper {
     display: flex;
     margin: 30px 0 0 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

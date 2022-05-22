@@ -32,9 +32,11 @@ const Category = ({ id }) => {
                 </div>
                 <hr />
                 <h3 className={styles.subtitle}>Examples</h3>
-                {games.map((game) => (
-                    <GameItem key={game._id} categoryId={id} game={game} />
-                ))}
+                <div className={styles.itemWrapper}>
+                    {games.map((game) => (
+                        <GameItem key={game._id} categoryId={id} game={game} />
+                    ))}
+                </div>
                 <div className={styles.buttonContainer}>
                     <Link href={`/create/${id}`}>
                         <a className={styles.createGameButton}>
